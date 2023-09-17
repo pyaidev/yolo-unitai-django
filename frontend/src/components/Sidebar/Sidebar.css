@@ -1,0 +1,114 @@
+.sidebar {
+    position: relative;
+    display: block;
+    width: 273px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #f1f1f1;
+    padding: 32px 2% 70px 3%;
+  }
+  .logo-side {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 32px;
+    color: #000;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 120% */
+  letter-spacing: -0.2px;
+  }
+  .active {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 12px 15px;
+    padding: 12px;
+    color: var(--icon-white, #fff);
+    font-feature-settings: "clig" off, "liga" off;
+    margin-bottom: 8px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.2px;
+    border-radius: 10px;
+    background: var(--base-primary-1, #0832de);
+  }
+  .active > span{
+    color: #fff;
+  }
+
+  .chart {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    color: var(--font-deafault-b, #343434);
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 8px
+  }
+  .exit {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    margin-top: 380px;
+    color: var(--font-deafault-b, #343434);
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .adminka-sid{
+    cursor: pointer;
+    margin-top: 70px;
+    padding: 12px 15px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .adminka-sid__inner{
+    display: block;
+    padding: 12px 15px;
+    color: var(--font-deafault-b, #343434);
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* dropdown/active-menu-item */
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.2px;
+  margin-bottom: 8px;
+  }
+  .adminka-sid__inner2{
+    border-radius: 10px;
+  background: #CED6F8;
+    display: block;
+    padding: 12px 15px;
+    color: var(--font-deafault-b, #343434);
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* dropdown/active-menu-item */
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.2px;
+  margin-bottom: 8px;
+  }

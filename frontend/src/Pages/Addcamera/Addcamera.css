@@ -1,0 +1,138 @@
+.addcamera {
+    padding-left: 80px;
+  }
+  .addcamera__form {
+    max-width: 540px;
+    margin-bottom: 30px;
+  }
+  .addcamera__form > h2 {
+    color: #000;
+    /* base/heading */
+    font-family: Roboto;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 41.6px */
+    letter-spacing: 0.1px;
+    margin-bottom: 25px;
+  }
+  .addcamera__form > label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .addcamera__form > label > p {
+    color: #000;
+    /* base/body */
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 23.4px */
+    letter-spacing: 0.1px;
+  }
+  .addcamera__form > label > input {
+    border: none;
+    outline: none;
+    display: block;
+    width: 320px;
+    padding: 10px 12px;
+    color: var(--font-subtext, #7d7d7d);
+    /* base/body 2 */
+    font-family: Roboto;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 19.5px */
+    letter-spacing: 0.1px;
+    border-radius: 8px;
+    background: var(--input-static, #f6f6f6);
+  }
+  .addcamera__form > label > select {
+    border: none;
+    outline: none;
+    display: block;
+    width: 320px;
+    padding: 10px 20px 10px 12px;
+    color: var(--font-deafault-b, #343434);
+    /* base/body 2 */
+    font-family: Roboto;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 19.5px */
+    letter-spacing: 0.1px;
+  
+    border-radius: 8px;
+    background: var(--input-static, #f6f6f6);
+  }
+  
+  .addcamera__form > button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 10px 108px;
+    border-radius: 8px;
+    background: var(--button-brand, #4340da);
+    color: var(--font-default-w, #fff);
+    text-align: center;
+    /* base/button */
+    font-family: Roboto;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.15px;
+    margin-top: 32px;
+  }
+  .label-check {
+    margin: 20px 0;
+    display: flex !important ;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 25px;
+  }
+  .label-check > input {
+    cursor: pointer;
+    width: 16px !important;
+    height: 16px !important;
+  }
+  .addcameratable {
+    display: block;
+    margin-right: 30px;
+    width:90%;
+    border: 2px dashed #4340DA;
+    padding: 30px 20px;
+    border-radius: 8px;
+  }
+  .tbody-action{
+    cursor: pointer;
+    position: relative;
+}
+.tbody-action__wrap{
+  display: none;
+  position: absolute;
+  width: 160px;
+  height: 77px;
+border-radius: 12px;
+background: #F5F4FF;
+padding: 12px 13px;
+z-index: 3;
+top: 24px;
+right: 20px;
+}
+.actionwrapinner{
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+ margin-bottom: 0px;
+  gap: 10px;
+  color: #200E32;
+font-family: Roboto;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.13px;
+}
