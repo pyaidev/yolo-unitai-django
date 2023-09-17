@@ -69,6 +69,13 @@ class CameraDetailView(generics.UpdateAPIView):
     serializer_class = CameraSerializer
 
 
+class CameraDeleteView(generics.DestroyAPIView):
+    queryset = Camera.objects.all()
+    serializer_class = CameraSerializer
+    # permissions_classes = (permissions.IsAuthenticated,)
+
+
+
 
 def video_feed(request, pk):
     camera = get_object_or_404(Camera, pk=pk)
@@ -206,3 +213,11 @@ def video_stream(camera):
         frame_bytes = buffer.tobytes()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+
+
+def video_stream2(request):
+
+    context = {
+        'video_url': request.GET.get('video_url')
+    }
+    return render(request, 'index.html', context)

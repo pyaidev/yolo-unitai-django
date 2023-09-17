@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from apps.camera.views import ModelListView, ModelRetrieveUpdateDestroyView, CameraListView, CameraCreateView, CameraDetailView, CameraDetailView, video_feed,index
+from apps.camera.views import ModelListView, ModelRetrieveUpdateDestroyView, CameraDeleteView, CameraListView, CameraCreateView, CameraDetailView, CameraDetailView, video_feed,index
 from .consumers import VideoFeedConsumer
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
@@ -11,6 +11,7 @@ urlpatterns = [
     path("create/", CameraCreateView.as_view()),
     path("<int:pk>/", CameraDetailView.as_view()),
     path("update/<int:pk>/", CameraDetailView.as_view()),
+    path("delete/<int:pk>/", CameraDeleteView.as_view()),
     path('video_feed/<int:pk>/', video_feed, name='video_feed'),
     # path('video_feeed/', video_streamm, name='video_stream'),
     path('', index, name='index'),
