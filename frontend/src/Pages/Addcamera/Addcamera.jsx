@@ -161,7 +161,7 @@ const Addcamera = () => {
             </form>
          </section>
          <div className='addcameratable' >
-         <table class=" table table-striped">
+         <table className=" table table-hover">
   <thead>
     <tr>
                <th>Название</th>
