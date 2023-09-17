@@ -1,5 +1,4 @@
-
-
+channels
 django
 psycopg2
 python-environ
@@ -15,6 +14,7 @@ gunicorn==20.1.0
 pytz==2021.1
 sqlparse==0.4.1
 python-dotenv~=0.19.0
+python-magic
 
 djangorestframework~=3.12.4
 django-database-view==0.3.0
