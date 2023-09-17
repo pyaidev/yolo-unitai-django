@@ -43,5 +43,6 @@ torchvision
 ultralytics
 opencv-python
 numpy
-fastapi
-uvicorn
+
+channels
+python-magic-bin

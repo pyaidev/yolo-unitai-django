@@ -2,20 +2,23 @@
 
 # Команды для разворачивания проекта
 
-`pip install --upgrade pip
+    pip install --upgrade pip
 
-pip install -r requirements/base.txt
+    pip install -r backend/requirements/production.txt
 
-pip install channels
-pip install python-magic-bin
+    pip install channels
+    pip install python-magic-bin
 
-python manage.py check --deploy`
+    python backend/manage.py check --deploy
 
 # Миграции
-python manage.py makemigrations
-python manage.py migrate
+    python backend/manage.py makemigrations
+    python backend/manage.py migrate
+
+# Создание админа
+    python backend/manage.py createsuperuser
 
 # Запуск
-python manage.py runserver  
+    python backend/manage.py runserver
 
 
