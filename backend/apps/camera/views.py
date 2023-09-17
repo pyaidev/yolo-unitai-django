@@ -215,9 +215,3 @@ def video_stream(camera):
                b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
 
 
-def video_stream2(request):
-
-    context = {
-        'video_url': request.GET.get('video_url')
-    }
-    return render(request, 'index.html', context)
