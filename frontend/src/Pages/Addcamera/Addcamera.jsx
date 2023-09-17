@@ -91,13 +91,13 @@ const Addcamera = () => {
        })
     }
     const handleDelet =(id)=>{
-      http.delete(`/camera/${id}/`).then((res)=>{
+      http.delete(`/camera/delete/${id}/`).then((res)=>{
         if(res.status===204){
             setRefresh(!refresh)
         }
       }).catch((err)=>{
         console.log(err)
-        notify(`Qandaydir hatolik bor!`)
+        notify(`Что-то не так!`)
       })
     }
     const handleEdit =(item)=>{
