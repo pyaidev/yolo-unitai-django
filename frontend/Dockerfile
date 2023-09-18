@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
-
+ARG REACT_APP_API
 
 # Install dependencies
 RUN npm install

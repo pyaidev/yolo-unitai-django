@@ -25,7 +25,7 @@ class Model(BaseModel):
 
 class Camera(BaseModel):
     user = models.ForeignKey('partner.Partner', on_delete=models.CASCADE, verbose_name="Пользователь")
-    address = models.CharField(max_length=100, unique=True, verbose_name="Адрес")
+    address = models.CharField(max_length=100, verbose_name="Адрес")
     title = models.CharField(max_length=100, verbose_name="Название")
     object_id = models.CharField(max_length=100, verbose_name="ID объектов")
     model = models.ForeignKey(Model, on_delete=models.CASCADE, verbose_name="Модель")
