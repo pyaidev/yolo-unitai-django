@@ -18,7 +18,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:security": "node scripts/check-node-forge-security.cjs",
     "eject": "react-scripts eject"
+  },
+  "overrides": {
+    "node-forge": "^1.4.3"
   },
   "eslintConfig": {
     "extends": [
