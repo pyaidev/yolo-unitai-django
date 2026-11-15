@@ -3,9 +3,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.tokens import RefreshToken
-from treasuremap.fields import LatLongField
-
-from .validators import CustomFileExtensionValidator
 from .manager import AccountManager
 
 
@@ -78,7 +75,6 @@ class PartnerProfile(models.Model):
         verbose_name = "Профиль пользователя"
         verbose_name_plural = "Профили пользователей"
         ordering = ["-id"]
-
 
 
 

@@ -125,7 +125,7 @@ class LogoutSerializer(serializers.Serializer):
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Partner
-        fields = "__all__"
+        exclude = ("password", "user_permissions", "groups")
 
 
 

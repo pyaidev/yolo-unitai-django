@@ -1,0 +1,9 @@
+-r base.txt
+
+# Installed by the backend image; separate so API tests need no model weights.
+torch==2.15.0
+torchvision==0.29.2
+ultralytics==8.4.214
+lap==0.5.14
+opencv-python==5.0.0.93
+numpy==2.5.4

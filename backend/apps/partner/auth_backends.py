@@ -12,4 +12,4 @@ class CustomAuthBackend(ModelBackend):
             return None
 
         # Verify the user's password
-        return user if user.check_password(password) else None
+        return user if user.check_password(password) and self.user_can_authenticate(user) else None

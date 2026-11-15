@@ -2,17 +2,18 @@ services:
   backend:
     build:
       context: ./backend
+    env_file:
+      - ./backend/.env
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
-    depends_on:
-      - frontend
+      - ./backend/media:/app/media
+      - ./backend/db.sqlite3:/app/db.sqlite3
 
   frontend:
     build:
       context: ./frontend
+      args:
+        REACT_APP_API: ${REACT_APP_API:-http://localhost:8000}
     ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
+      - "3000:8080"

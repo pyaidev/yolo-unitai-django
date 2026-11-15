@@ -19,13 +19,13 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = env.str("SECRET_KEY")
-SECRET_KEY = "1"
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = env.bool("DEBUG")
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
 
 # Application definition
 DJANGO_APPS = [
@@ -49,10 +49,8 @@ CUSTOM_APPS = [
 
 THIRD_PARTY_APPS = [
     "drf_yasg",
-    "treasuremap",
     "rest_framework",
     "rest_framework.authtoken",
-    "dj_rest_auth",
     "django_rest_passwordreset",
     "corsheaders",
 
@@ -67,7 +65,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     "DEFAULT_FILTER_BACKENDS": (
         "django_filters.rest_framework.DjangoFilterBackend",
@@ -109,8 +107,9 @@ TEMPLATES = [
 
 
 AUTH_USER_MODEL = "partner.Partner"
+AUTHENTICATION_BACKENDS = ["apps.partner.auth_backends.CustomAuthBackend"]
 # WSGI_APPLICATION = "core.wsgi.application"
-ASGI_APPLICATION = 'core.routing.application'
+ASGI_APPLICATION = 'core.asgi.application'
 
 
 
@@ -159,7 +158,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = (BASE_DIR / "static/",)
+STATICFILES_DIRS = (BASE_DIR / "static",) if (BASE_DIR / "static").is_dir() else ()
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -214,6 +213,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000"
 
 ]
+LOCAL_BASE_URL = env.str("LOCAL_BASE_URL", default="http://localhost:8000")
+PROD_BASE_URL = env.str("PROD_BASE_URL", default="")
 
 
 
@@ -225,4 +226,3 @@ CELERY_TIMEZONE = "Asia/Tashkent"
 
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
-

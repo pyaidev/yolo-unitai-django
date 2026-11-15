@@ -14,7 +14,7 @@ from django.views.generic.base import  TemplateView
 from .serializers import RegisterSerializer, SetNewPasswordSerializer, ResetPasswordEmailRequestSerializer, LoginSerializer, \
     LogoutSerializer, UserListSerializer, UserUpdateSerializer
 from .permissions import IsOwnUserOrReadOnly
-from dj_rest_auth.views import LoginView as RestLoginView
+from django.contrib.auth import login
 
 # is_authenticated permission
 from rest_framework.permissions import IsAuthenticated
@@ -23,6 +23,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class AccountRegisterView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
         user = request.data
@@ -35,20 +36,23 @@ class AccountRegisterView(generics.GenericAPIView):
         return Response({"success": True, "data": user_data}, status=status.HTTP_201_CREATED)
 
 
-class LoginAPIView(RestLoginView):
+class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
+    permission_classes = (permissions.AllowAny,)
     def post(self, request, *args, **kwargs):
         self.request = request
         self.serializer = self.get_serializer(data=self.request.data)
         self.serializer.is_valid(raise_exception=True)
         email_or_username = self.serializer.validated_data.get('email_or_username')
-        self.login()
+        self.user = self.serializer.validated_data['user']
+        login(request, self.user)
         return Response({'tokens': self.user.tokens, 'id': self.user.pk,'email_or_username':email_or_username,'first_name':self.user.first_name,'image_url':self.user.image_url,'last_name':self.user.last_name}, status=status.HTTP_200_OK)
 
 
 
 class RequestPasswordResetEmail(generics.GenericAPIView):
     serializer_class = ResetPasswordEmailRequestSerializer
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -76,6 +80,7 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
 
 class PasswordTokenCheckAPI(generics.GenericAPIView):
     serializer_class = SetNewPasswordSerializer
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, uidb64, token):
 
@@ -109,6 +114,7 @@ class PasswordTokenCheckAPI(generics.GenericAPIView):
 
 class SetNewPasswordAPIView(generics.GenericAPIView):
     serializer_class = SetNewPasswordSerializer
+    permission_classes = (permissions.AllowAny,)
 
     def patch(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -132,20 +138,20 @@ class LogoutAPIView(generics.GenericAPIView):
 
 
 class UserList(generics.ListAPIView):
+    permission_classes = (permissions.IsAdminUser,)
     queryset = Partner.objects.all()
     serializer_class = UserListSerializer
     pagination_class = None
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        print(queryset)  # Add this line to check if queryset has data
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
 
 
 class UserUpdateView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticated, IsOwnUserOrReadOnly)
     queryset = Partner.objects.all()
     serializer_class = UserUpdateSerializer
 
     lookup_field = 'pk'
-

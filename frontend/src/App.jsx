@@ -1,4 +1,5 @@
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './Assets/main.css'
 import Authentication from './auth/Authentication';
 import UnAuthentication from './auth/UnAuthentication';

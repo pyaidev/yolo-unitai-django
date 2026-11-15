@@ -1,12 +1,9 @@
-import cv2
 import time
 import requests
-import numpy as np
 from collections import defaultdict
 from django.http import StreamingHttpResponse
 from django.views.decorators import gzip
 from django.shortcuts import render
-from ultralytics import YOLO
 from rest_framework import generics, status, views, permissions
 from rest_framework.response import Response
 from .serializers import ModelSerializer, CameraSerializer
@@ -42,6 +39,8 @@ class CameraListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
+        if getattr(self, 'swagger_fake_view', False) or not user.is_authenticated:
+            return Camera.objects.none()
         return Camera.objects.filter(user=user)
 
 
@@ -97,6 +96,7 @@ def send_tg_msg(token: str, chat_id: str, message: str):
     requests.post(url)
 
 def send_tg_img(token: str, chat_id: str, frame):
+    import cv2
     method = "sendPhoto"
     img_encoded = cv2.imencode('.jpg', frame)[1].tostring()
     files = {'photo': img_encoded}
@@ -140,6 +140,10 @@ def search_objects_by_id(results, object_ids: list):
 
 
 def video_stream(camera):
+    # Keep API/auth startup independent of the optional inference runtime.
+    import cv2
+    import numpy as np
+    from ultralytics import YOLO
     # camera = Camera.objects.get()
     model = camera.model
     video_path = camera.address
@@ -213,5 +217,3 @@ def video_stream(camera):
         frame_bytes = buffer.tobytes()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-
-

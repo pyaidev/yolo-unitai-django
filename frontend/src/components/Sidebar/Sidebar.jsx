@@ -66,7 +66,7 @@ const Sidebar = () => {
             </>
         } */}
 
-         <Link onClick={()=>exitHandle()} className={"exit"}>
+         <Link to="/" onClick={()=>exitHandle()} className={"exit"}>
             <img src={Exit} alt="" />
             <span>Выход</span>
          </Link>
