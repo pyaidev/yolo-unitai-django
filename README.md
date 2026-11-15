@@ -19,8 +19,8 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-For web/API-only development, install `requirements/web.lock` instead. The camera
-streaming feature additionally requires `requirements/ml.lock` (included by
+For web/API-only development, install `requirements/web.lock.txt` instead. The camera
+streaming feature additionally requires `requirements/ml.lock.txt` (included by
 `production.txt`). Runtime imports are lazy; API tests need no model weights.
 
 Frontend (from `frontend/`):
@@ -50,8 +50,8 @@ python manage.py check --settings=core.settings.test
 python manage.py test --settings=core.settings.test
 python manage.py makemigrations --check --dry-run --settings=core.settings.test
 python scripts/ml_smoke.py
-pip-audit -r requirements/web.lock --require-hashes --disable-pip
-pip-audit -r requirements/ml.lock --require-hashes --disable-pip
+pip-audit -r requirements/web.lock.txt --require-hashes --disable-pip
+pip-audit -r requirements/ml.lock.txt --require-hashes --disable-pip
 ```
 
 Tests use synthetic credentials, an in-memory database and a randomly initialized
@@ -63,8 +63,8 @@ Python lockfiles include transitive versions, hashes and platform markers. Regen
 them together after updating direct requirements, then repeat audits and tests:
 
 ```sh
-uv pip compile requirements/base.txt --universal --python-version 3.12 --generate-hashes -o requirements/web.lock
-uv pip compile requirements/ml.txt --universal --python-version 3.12 --generate-hashes -o requirements/ml.lock
+uv pip compile requirements/base.txt --universal --python-version 3.12 --generate-hashes -o requirements/web.lock.txt
+uv pip compile requirements/ml.txt --universal --python-version 3.12 --generate-hashes -o requirements/ml.lock.txt
 ```
 
 ## Security upgrade, 2026-11-15
@@ -98,3 +98,11 @@ ML lock. Frontend container listens on 8080 (Compose maps host 3000).
 Full inference-image execution, existing trained checkpoints and live RTSP feeds
 must be verified in staging before a production rollout. No production deployment
 is performed by this dependency change.
+
+Verification on 2026-11-15: npm/pip audits found no known vulnerabilities; 9 Python,
+3 dependency and 4 browser checks passed, as did synthetic YOLO tracking. GitHub
+confirmed all 310 previously open alerts closed after the main-branch push.
+The GitHub CI jobs did not start: the account is locked due to a billing issue.
+Local Docker builds succeeded, but subsequent container execution failed with a
+Docker Desktop metadata I/O error while the host disk had approximately 2 GB free.
+These environment issues are not recorded as passing CI/container runtime tests.

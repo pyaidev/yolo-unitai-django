@@ -43,11 +43,11 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-          cache-dependency-path: backend/requirements/web.lock
-      - run: python -m pip install --require-hashes -r requirements/web.lock
+          cache-dependency-path: backend/requirements/web.lock.txt
+      - run: python -m pip install --require-hashes -r requirements/web.lock.txt
       - run: python -m pip install pip-audit==2.10.1
       - run: python -m pip check
-      - run: pip-audit -r requirements/web.lock --require-hashes --disable-pip
+      - run: pip-audit -r requirements/web.lock.txt --require-hashes --disable-pip
       - run: python manage.py check --settings=core.settings.test
       - run: python manage.py test apps.partner.tests apps.camera.tests --settings=core.settings.test
       - run: python manage.py makemigrations --check --dry-run --settings=core.settings.test
