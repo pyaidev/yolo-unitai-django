@@ -1,6 +1,6 @@
 # Python 3.12+. Runtime dependencies; inference extras are in ml.txt.
 Django==5.2.19
-asgiref==3.11.0
+asgiref==3.13.0
 channels==4.3.2
 django-environ==0.14.0
 django-cors-headers==4.9.0
